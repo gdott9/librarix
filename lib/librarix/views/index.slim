@@ -1,0 +1,6 @@
+- content_for(:title) { 'Index' }
+
+ul
+  - movies.each do |movie|
+    li
+      == slim :movie, locals: {movie: movie}

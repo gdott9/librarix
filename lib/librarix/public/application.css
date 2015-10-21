@@ -1,0 +1,1 @@
+body{margin:0}h2{margin-top:0}ul{list-style-type:none;margin:0;padding:0}ul li{padding:10px;display:flex;flex-flow:row wrap;align-items:center;justify-content:center}ul li .poster{margin-right:10px}ul li .informations{align-self:flex-start;flex:1 1 300px}ul li:nth-child(even){background-color:#f4f4f4}

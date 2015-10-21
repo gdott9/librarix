@@ -1,0 +1,16 @@
+.poster
+  - if movie.poster_path
+    img src="#{poster_url(movie.poster_path, 'w154')}"
+.informations
+  h2
+    a href="https://www.themoviedb.org/movie/#{movie.id}" #{movie.original_title} (#{movie.release_year})
+  p = movie.overview
+.actions
+  - if movie.added?
+    form method="post" action="/remove"
+      input type="hidden" name="id" value="#{movie.id}"
+      button type="submit" Remove
+  - else
+    form method="post" action="/add"
+      input type="hidden" name="id" value="#{movie.id}"
+      button type="submit" Add
