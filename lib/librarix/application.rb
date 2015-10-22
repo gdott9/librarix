@@ -17,8 +17,19 @@ module Librarix
     end
 
     get '/search' do
-      movies = params.key?('search') ? Tmdb::Movie.find(params['search']) : Tmdb::Movie.popular.map { |m| Tmdb::Movie.new(m) }
-      slim :search, locals: {movies: movies, conf: Tmdb::Configuration.new}
+      movies = if params['search'].nil?
+        Tmdb::Movie.popular.map { |m| Tmdb::Movie.new(m) }
+      elsif params['search'] == ''
+        []
+      else
+        Tmdb::Movie.find(params['search'])
+      end
+
+      if request.xhr?
+        slim :list, layout: false, locals: {movies: movies}
+      else
+        slim :search, locals: {movies: movies}
+      end
     end
 
     post '/add' do
@@ -36,7 +47,11 @@ module Librarix
     post '/remove' do
       Librarix::Redis::Movie.new(params[:id]).remove
 
-      redirect to('/')
+      if request.xhr?
+        ""
+      else
+        redirect to('/')
+      end
     end
   end
 end

@@ -1,9 +1,28 @@
 body {
-  margin: 0;
+  margin: 10px;
 }
 
 h2 {
   margin-top: 0;
+}
+
+#search {
+  display: flex;
+
+  input {
+    border-radius: 0.4em;
+    border: solid 3px #f4f4f4;
+  }
+
+  input[type="submit"] {
+    background-color: #f4f4f4;
+  }
+
+  input[type="text"] {
+    flex-grow: 1;
+    font-size: 1.4em;
+    padding: 5px;
+  }
 }
 
 ul {
@@ -12,24 +31,26 @@ ul {
   padding: 0;
 
   li {
-    padding: 10px;
-
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: center;
-
-    .poster {
-      margin-right: 10px;
-    }
-
-    .informations {
-      align-self: flex-start;
-      flex: 1 1 300px;
-    }
+    padding: 10px 0;
   }
 
   li:nth-child(even) {
     background-color: #f4f4f4;
+  }
+}
+
+.movie {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+
+  .poster {
+    margin-right: 10px;
+  }
+
+  .informations {
+    align-self: flex-start;
+    flex: 1 1 300px;
   }
 }
