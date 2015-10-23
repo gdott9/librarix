@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Librarix::VERSION
   spec.authors       = ["Guillaume Dott"]
   spec.email         = ["guillaume+github@dott.fr"]
-  spec.summary       = %q{A simple webapp to manage your collections}
+  spec.summary       = %q{A simple webapp to manage your movie collection}
   spec.description   = %q{Manage all your collections in your browser and automatically fetch infos from TheMovieDB}
   spec.homepage      = ""
   spec.license       = "MIT"

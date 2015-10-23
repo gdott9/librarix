@@ -1,10 +1,14 @@
 # Librarix
 
-TODO: Write a gem description
+Manage all your collections in your browser and automatically fetch infos from TheMovieDB
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Librarix is a simple Sinatra app that can be used as a standalone app or mounted in another app.
+
+### Standalone
+
+Create a Gemfile and add this line:
 
 ```ruby
 gem 'librarix'
@@ -12,20 +16,16 @@ gem 'librarix'
 
 And then execute:
 
-    $ bundle
+```sh
+$ bundle
+```
 
-Or install it yourself as:
+Finally, you need a `config.ru` file to launch the Rack application:
+```ruby
+require 'librarix'
 
-    $ gem install librarix
+Tmdb::Api.key('THE_MOVIE_DB_API_KEY')
+Librarix.redis = Redis.new # use the correct host, port and db number for your redis database
 
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/librarix/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+run Librarix::Application
+```
