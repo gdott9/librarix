@@ -1,3 +1,7 @@
 - content_for(:title) { 'Index' }
 
+form method="get" action="/" id="filter"
+  input type="text" name="title" value="#{params['title']}" autocomplete="off"
+  input type="submit" value="Filter"
+
 == slim :list, locals: {movies: movies}

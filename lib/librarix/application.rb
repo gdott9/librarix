@@ -1,3 +1,4 @@
+require 'librarix/filter'
 require 'librarix/menu'
 require 'librarix/the_movie_db'
 
@@ -22,7 +23,7 @@ module Librarix
     helpers Librarix::Menu::Helper
 
     get '/' do
-      slim :index, locals: {movies: Librarix::Redis::Movie.all.sort_by(&:release_date).reverse}
+      slim :index, locals: {movies: Librarix::Filter.new(params).movies}
     end
 
     get '/search' do
