@@ -1,3 +1,4 @@
+require 'librarix/menu'
 require 'librarix/the_movie_db'
 
 require 'sinatra/base'
@@ -10,7 +11,15 @@ require 'themoviedb'
 
 module Librarix
   class Application < Sinatra::Application
+    def initialize(app = nil)
+      super
+
+      Librarix::Menu.menu.add 'Home', '/'
+      Librarix::Menu.menu.add 'Add a movie', '/search'
+    end
+
     helpers Librarix::TheMovieDB
+    helpers Librarix::Menu::Helper
 
     get '/' do
       slim :index, locals: {movies: Librarix::Redis::Movie.all.sort_by(&:release_date).reverse}
