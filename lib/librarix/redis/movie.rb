@@ -38,6 +38,11 @@ module Librarix
       end
 
       def view
+        Librarix.redis.sadd('viewed_movies_id', id)
+      end
+
+      def viewed?
+        Librarix.redis.sismember('viewed_movies_id', id)
       end
     end
   end

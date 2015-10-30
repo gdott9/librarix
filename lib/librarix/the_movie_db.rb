@@ -26,6 +26,10 @@ module Librarix
       def added?
         Librarix::Redis::Movie.new(id).added?
       end
+
+      def viewed?
+        Librarix::Redis::Movie.new(id).viewed?
+      end
     end
   end
 end

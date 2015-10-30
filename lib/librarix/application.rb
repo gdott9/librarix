@@ -53,5 +53,15 @@ module Librarix
         redirect to('/')
       end
     end
+
+    post '/view' do
+      Librarix::Redis::Movie.new(params[:id]).view
+
+      if request.xhr?
+        ""
+      else
+        redirect to('/')
+      end
+    end
   end
 end
