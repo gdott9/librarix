@@ -2,6 +2,11 @@
 
 form method="get" action="/" id="filter"
   input type="text" name="title" value="#{params['title']}" autocomplete="off"
+  select name="view_state"
+    option value="all" selected=(params['view_state'].nil? || params['view_state'] == '' || params['view_state'] == 'all') All movies
+    option value="viewed" selected=(params['view_state'] == 'viewed') Only viewed
+    option value="not_viewed" selected=(params['view_state'] == 'not_viewed') Not viewed
   input type="submit" value="Filter"
 
-== slim :list, locals: {movies: movies}
+
+== slim :list, locals: {compact: compact, movies: movies}

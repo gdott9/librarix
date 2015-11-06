@@ -16,7 +16,7 @@ module Librarix
 
     module Movie
       def release_date
-        @_release_date ||= Date.parse(super) unless super.nil?
+        @_release_date ||= Date.parse(super) unless super.nil? || super.empty?
       end
 
       def release_year

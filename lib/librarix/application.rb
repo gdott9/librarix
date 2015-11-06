@@ -23,7 +23,10 @@ module Librarix
     helpers Librarix::Menu::Helper
 
     get '/' do
-      slim :index, locals: {movies: Librarix::Filter.new(params).movies}
+      slim :index, locals: {
+        compact: params.key?('compact'),
+        movies: Librarix::Filter.new(params).movies
+      }
     end
 
     get '/search' do

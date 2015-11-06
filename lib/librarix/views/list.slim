@@ -1,4 +1,4 @@
 ul#movies
   - movies.each do |movie|
     li
-      == slim :movie, locals: {movie: movie}
+      == slim :movie, locals: {compact: locals.key?('compact') ? compact : false, movie: movie}
