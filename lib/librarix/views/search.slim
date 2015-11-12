@@ -1,8 +1,9 @@
 - content_for(:title) { 'Search' }
 
 form method="get" action="/search" id="search"
-  input type="text" name="search" value="#{params['search']}" autocomplete="off" autofocus="on"
-  input type="submit" value="Search"
+  div id="search-main"
+    input type="text" name="search" value="#{params['search']}" autocomplete="off" autofocus="on"
+    input type="submit" value="Search"
 
 div
   == slim :list, locals: {movies: movies}

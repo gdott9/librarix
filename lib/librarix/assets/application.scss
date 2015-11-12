@@ -6,7 +6,7 @@ h2 {
   margin-top: 0;
 }
 
-body > form {
+body > form #search-main {
   display: flex;
 
   input {
@@ -20,6 +20,7 @@ body > form {
 
   input[type="text"] {
     flex-grow: 1;
+    min-width: 50px;
     font-size: 1.4em;
     padding: 5px;
   }
