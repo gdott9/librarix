@@ -28,6 +28,11 @@ module Librarix
       slim :index, locals: {movies: Librarix::Filter.new(params).movies}
     end
 
+    get '/movie/:id' do |id|
+      movie = Librarix::Redis::Movie.new(id).fetch
+      slim :movie, layout: !request.xhr?, locals: {movie: movie}
+    end
+
     get '/search' do
       movies = if params['search'].nil?
         Tmdb::Movie.popular.map { |m| Tmdb::Movie.new(m) }
