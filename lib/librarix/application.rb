@@ -1,6 +1,7 @@
 require 'librarix/filter'
 require 'librarix/menu'
 require 'librarix/the_movie_db'
+require 'librarix/helpers'
 
 require 'sinatra/base'
 require 'sinatra/content_for'
@@ -21,12 +22,10 @@ module Librarix
 
     helpers Librarix::TheMovieDB
     helpers Librarix::Menu::Helper
+    helpers Librarix::Helpers
 
     get '/' do
-      slim :index, locals: {
-        compact: params.key?('compact'),
-        movies: Librarix::Filter.new(params).movies
-      }
+      slim :index, locals: {movies: Librarix::Filter.new(params).movies}
     end
 
     get '/search' do

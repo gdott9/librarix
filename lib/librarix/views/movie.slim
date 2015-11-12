@@ -1,12 +1,12 @@
 .movie data-id="#{movie.id}"
   .poster
     - if movie.poster_path
-      img src="#{poster_url(movie.poster_path, compact ? 'w92' : 'w154')}"
+      img src="#{poster_url(movie.poster_path, compact? ? 'w92' : 'w154')}"
   .informations
     h2
       a href="https://www.themoviedb.org/movie/#{movie.id}" #{movie.original_title}
     p = movie.release_date
-    - unless compact
+    - unless compact?
       p = movie.overview
   .actions
     - if movie.added?
