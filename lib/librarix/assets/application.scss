@@ -2,11 +2,41 @@ body {
   margin: 10px;
 }
 
-h2 {
-  margin-top: 0;
+a {
+  text-decoration: none;
+  color: #666;
+
+  &:hover {
+    color: #888;
+  }
 }
 
-body > form #search-main {
+h2 {
+  margin-top: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  font-size: 1.2em;
+  font-family: Verdana,Arial,sans-serif;
+}
+
+ul#movies, ul#menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul#menu {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+
+  li {
+    margin: 5px;
+  }
+}
+
+form #search-main {
   display: flex;
 
   input {
@@ -24,12 +54,6 @@ body > form #search-main {
     font-size: 1.4em;
     padding: 5px;
   }
-}
-
-ul#movies {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
 }
 
 .default, .compact {

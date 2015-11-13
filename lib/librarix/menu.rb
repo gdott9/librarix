@@ -27,7 +27,7 @@ module Librarix
     private
 
     def around(content)
-      "<ul>#{content}</ul>"
+      "<ul id=\"menu\">#{content}</ul>"
     end
 
     class Element
