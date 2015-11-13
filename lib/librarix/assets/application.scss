@@ -26,11 +26,13 @@ body > form #search-main {
   }
 }
 
-ul {
+ul#movies {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
 
+.default, .compact {
   li {
     padding: 10px 0;
   }
@@ -38,20 +40,29 @@ ul {
   li:nth-child(even) {
     background-color: #f4f4f4;
   }
+
+  .movie {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+
+    .poster {
+      margin-right: 10px;
+    }
+
+    .informations {
+      align-self: flex-start;
+      flex: 1 1 300px;
+    }
+  }
 }
 
-.movie {
+.poster {
   display: flex;
   flex-flow: row wrap;
-  align-items: center;
-  justify-content: center;
 
-  .poster {
-    margin-right: 10px;
-  }
-
-  .informations {
-    align-self: flex-start;
-    flex: 1 1 300px;
+  .movie {
+    width: 160px;
   }
 }

@@ -9,8 +9,10 @@ form method="get" action="/" id="filter"
       option value="all" selected=(params['view_state'].nil? || params['view_state'] == '' || params['view_state'] == 'all') All movies
       option value="viewed" selected=(params['view_state'] == 'viewed') Only viewed
       option value="not_viewed" selected=(params['view_state'] == 'not_viewed') Not viewed
-    input type="checkbox" name="compact" id="compact" checked=(params['compact'])
-    label for="compact" Compact view
+    select name="template"
+      option value="default" selected=(template == 'default') Default
+      option value="compact" selected=(template == 'compact') Compact
+      option value="poster" selected=(template == 'poster') Poster
 
 
 == slim :list, locals: {movies: movies}

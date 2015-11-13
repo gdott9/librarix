@@ -1,23 +1,2 @@
 .movie data-id="#{movie.id}"
-  .poster
-    - if movie.poster_path
-      img src="#{poster_url(movie.poster_path, compact? ? 'w92' : 'w154')}"
-  .informations
-    h2
-      a href="https://www.themoviedb.org/movie/#{movie.id}" #{movie.original_title}
-    p = movie.release_date
-    - unless compact?
-      p = movie.overview
-  .actions
-    - if movie.added?
-      - unless movie.viewed?
-        form method="post" action="/view"
-          input type="hidden" name="id" value="#{movie.id}"
-          button type="submit" data-action="view-movie" View
-      form method="post" action="/remove"
-        input type="hidden" name="id" value="#{movie.id}"
-        button type="submit" data-action="remove-movie" Remove
-    - else
-      form method="post" action="/add"
-        input type="hidden" name="id" value="#{movie.id}"
-        button type="submit" data-action="add-movie" Add
+  == slim :"movie/#{template}", locals: {movie: movie}
