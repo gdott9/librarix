@@ -17,3 +17,9 @@ form method="get" action="/" id="filter"
 
 
 == slim :list, locals: {movies: movies}
+- if maybe_search?(movies)
+  p
+    | Search for
+    strong
+      a<> href="#{url("/search?search=#{params['title']}")}" = params['title']
+    | ?

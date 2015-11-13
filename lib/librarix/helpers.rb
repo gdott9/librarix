@@ -7,5 +7,9 @@ module Librarix
         'default'
       end
     end
+
+    def maybe_search?(movies)
+      movies.empty? && params.key?('title')
+    end
   end
 end
