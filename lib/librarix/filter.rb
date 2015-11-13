@@ -1,32 +1,78 @@
 module Librarix
   class Filter
+    def self.filter_by_title(movies, title)
+      return movies unless title
+      movies.select { |movie| movie.title.downcase.include?(title) }
+    end
+
+    def self.filter_by_view_state(movies, view_state)
+      if view_state == 'viewed'
+        movies.select(&:viewed?)
+      elsif view_state == 'not_viewed'
+        movies.reject(&:viewed?)
+      else
+        movies
+      end
+    end
+
+    def self.sort(movies, sort)
+      if sort == 'date'
+        movies.sort_by(&:release_date).reverse
+      else
+        movies.sort_by(&:title)
+      end
+    end
+
+    def self.group(movies, group, sort)
+      return {all: movies} unless group
+
+      if sort == 'date'
+        movies.group_by { |movie| movie.release_date.year }
+      else
+        movies.group_by { |movie| movie.title[0].upcase }
+      end
+    end
+
     attr_reader :movies, :params
 
     def initialize(params)
       @params = params
-      filter
     end
 
-    private
+    def movies
+      @movies ||= begin
+        movies = Librarix::Redis::Movie.all
 
-    def filter
-      @movies = Librarix::Redis::Movie.all
-      by_title if @params.key?('title')
-      by_view_state if @params.key?('view_state')
+        movies = self.class.filter_by_title(movies, params['title'])
+        movies = self.class.filter_by_view_state(movies, params['view_state'])
 
-      @movies.sort_by!(&:release_date).reverse!
-    end
-
-    def by_title
-      movies.select! { |movie| movie.title.downcase.include?(params['title']) }
-    end
-
-    def by_view_state
-      if params['view_state'] == 'viewed'
-        movies.keep_if(&:viewed?)
-      elsif params['view_state'] == 'not_viewed'
-        movies.delete_if(&:viewed?)
+        movies = self.class.sort(movies, sort)
+        movies = self.class.group(movies, group, sort)
       end
+    end
+
+    def group
+      @group ||= params.key?('group') && params['group']
+    end
+
+    def view_state
+      @view_state ||= if %w{all viewed not_viewed}.include?(params['view_state'])
+        params['view_state']
+      else
+        'all'
+      end
+    end
+
+    def sort
+      @sort ||= if %w{alphabetical date}.include?(params['sort'])
+        params['sort']
+      else
+        'date'
+      end
+    end
+
+    def maybe_search?
+      movies.empty? && params.key?('title')
     end
   end
 end

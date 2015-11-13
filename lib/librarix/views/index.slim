@@ -7,17 +7,25 @@ form method="get" action="/" id="filter"
     input type="submit" value="Filter"
   div id="search-more"
     select name="view_state"
-      option value="all" selected=(params['view_state'].nil? || params['view_state'] == '' || params['view_state'] == 'all') All movies
-      option value="viewed" selected=(params['view_state'] == 'viewed') Only viewed
-      option value="not_viewed" selected=(params['view_state'] == 'not_viewed') Not viewed
+      option value="all" selected=(filter.view_state == 'all') All movies
+      option value="viewed" selected=(filter.view_state == 'viewed') Only viewed
+      option value="not_viewed" selected=(filter.view_state == 'not_viewed') Not viewed
+    select name="sort"
+      option value="alphabetical" selected=(filter.sort == 'alphabetical') Alphabetical
+      option value="date" selected=(filter.sort == 'date') Release date
+    input type="checkbox" name="group" id="group" checked=(filter.group)
+    label for="group" Group by sort
     select name="template"
       option value="default" selected=(template == 'default') Default
       option value="compact" selected=(template == 'compact') Compact
       option value="poster" selected=(template == 'poster') Poster
 
 
-== slim :list, locals: {movies: movies}
-- if maybe_search?(movies)
+- filter.movies.each do |group, movies|
+  - unless group == :all
+    h1 = group
+  == slim :list, locals: {movies: movies}
+- if filter.maybe_search?
   p
     | Search for
     strong

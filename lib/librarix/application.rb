@@ -25,7 +25,7 @@ module Librarix
     helpers Librarix::Helpers
 
     get '/' do
-      slim :index, locals: {movies: Librarix::Filter.new(params).movies}
+      slim :index, locals: {filter: Librarix::Filter.new(params)}
     end
 
     get '/movie/:id' do |id|
