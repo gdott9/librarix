@@ -72,7 +72,7 @@ module Librarix
     end
 
     def maybe_search?
-      movies.empty? && params.key?('title')
+      movies.all? { |k,v| v.empty? } && params.key?('title')
     end
   end
 end
