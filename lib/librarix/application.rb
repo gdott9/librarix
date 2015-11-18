@@ -42,11 +42,7 @@ module Librarix
         Tmdb::Movie.find(params['search'])
       end
 
-      if request.xhr?
-        slim :list, layout: false, locals: {movies: movies}
-      else
-        slim :search, locals: {movies: movies}
-      end
+      slim :search, locals: {movies: movies}
     end
 
     post '/add' do

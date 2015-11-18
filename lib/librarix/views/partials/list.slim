@@ -1,4 +1,4 @@
 ul.movies class="#{template}"
   - movies.each do |movie|
     li
-      == slim :movie, locals: {movie: movie}
+      == slim :'partials/movie', locals: {movie: movie}

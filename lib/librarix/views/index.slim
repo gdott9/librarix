@@ -24,7 +24,7 @@ form method="get" action="/" id="filter"
 - filter.movies.each do |group, movies|
   - unless group == :all
     h1 = group
-  == slim :list, locals: {movies: movies}
+  == slim :'partials/list', locals: {movies: movies}
 - if filter.maybe_search?
   p
     | Search for

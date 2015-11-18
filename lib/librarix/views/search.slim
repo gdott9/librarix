@@ -7,4 +7,4 @@ form method="get" action="/search" id="search"
     input type="submit" value="Search"
 
 div
-  == slim :list, locals: {movies: movies}
+  == slim :'partials/list', locals: {movies: movies}
