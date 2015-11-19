@@ -62,6 +62,16 @@ module Librarix
       redirect to('/')
     end
 
+    post '/update' do
+      movie = Librarix::Redis::Movie.new(params[:id]).update
+
+      if request.xhr?
+        slim :'partials/movie', layout: false, locals: {movie: movie}
+      else
+        redirect to('/')
+      end
+    end
+
     post '/remove' do
       Librarix::Redis::Movie.new(params[:id]).remove
 

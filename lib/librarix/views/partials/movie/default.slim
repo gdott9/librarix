@@ -15,6 +15,9 @@
       form method="post" action="/view"
         input type="hidden" name="id" value="#{movie.id}"
         button type="submit" data-action="view-movie" View
+    form method="post" action="/update"
+      input type="hidden" name="id" value="#{movie.id}"
+      button type="submit" data-action="update-movie" Update
     form method="post" action="/remove"
       input type="hidden" name="id" value="#{movie.id}"
       button type="submit" data-action="remove-movie" Remove
