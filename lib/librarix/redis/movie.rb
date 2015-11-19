@@ -7,13 +7,28 @@ module Librarix
         Array(Librarix.redis.smembers('movies_id')).map { |id| new(id).fetch }
       end
 
+      def self.genres
+        fetch_genres unless Librarix.redis.exists('genres')
+        Librarix.redis.smembers('genres').sort
+      end
+
+      def self.fetch_genres
+        Tmdb::Genre.list['genres'].each do |genre|
+          Librarix.redis.sadd('genres', genre['name'])
+        end
+      end
+
       def initialize(id)
         @id = id.to_i
       end
 
+      def movie
+        @movie ||= fetch
+      end
+
       def add
         Librarix.redis.sadd('movies_id', id)
-        fetch
+        movie
       end
 
       def added?

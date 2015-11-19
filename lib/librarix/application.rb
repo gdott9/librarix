@@ -30,7 +30,12 @@ module Librarix
 
     get '/movie/:id' do |id|
       movie = Librarix::Redis::Movie.new(id).fetch
-      slim :movie, layout: !request.xhr?, locals: {movie: movie}
+
+      if request.xhr?
+        slim :'partials/movie', layout: false, locals: {movie: movie}
+      else
+        slim :movie, locals: {movie: movie}
+      end
     end
 
     get '/search' do

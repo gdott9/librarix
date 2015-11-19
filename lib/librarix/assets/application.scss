@@ -20,7 +20,7 @@ h2 {
   font-family: Verdana,Arial,sans-serif;
 }
 
-ul.movies, ul#menu {
+ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -33,6 +33,31 @@ ul#menu {
 
   li {
     margin: 5px;
+  }
+}
+
+#search-genres ul {
+  display: flex;
+  flex-flow: row wrap;
+
+  li {
+    margin-right: 0.5em;
+  }
+}
+
+ul.genres {
+  display: flex;
+
+  li {
+    margin-right: 0.4em;
+  }
+
+  li:last-child::after {
+    content: '';
+  }
+
+  li::after {
+    content: ',';
   }
 }
 
@@ -57,11 +82,11 @@ form #search-main {
 }
 
 .default, .compact {
-  li {
+  & > li {
     padding: 10px 0;
   }
 
-  li:nth-child(even) {
+  & > li:nth-child(even) {
     background-color: #f4f4f4;
   }
 

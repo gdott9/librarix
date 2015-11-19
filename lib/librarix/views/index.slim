@@ -19,6 +19,12 @@ form method="get" action="/" id="filter"
       option value="default" selected=(template == 'default') Default
       option value="compact" selected=(template == 'compact') Compact
       option value="poster" selected=(template == 'poster') Poster
+  div id="search-genres"
+    ul
+      - Librarix::Redis::Movie.genres.each do |genre|
+        li
+          input type="checkbox" name="genres[#{genre}]" id="#{genre}" checked=(filter.genres.include?(genre))
+          label for="#{genre}" = genre
 
 
 - filter.movies.each do |group, movies|

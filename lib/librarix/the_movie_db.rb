@@ -15,6 +15,10 @@ module Librarix
     end
 
     module Movie
+      def genres
+        super || []
+      end
+
       def release_date
         @_release_date ||= Date.parse(super) unless super.nil? || super.empty?
       end

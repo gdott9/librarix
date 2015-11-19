@@ -1,5 +1,12 @@
 module Librarix
   class Filter
+    def self.filter_by_genre(movies, genres)
+      return movies if genres.empty?
+      movies.reject do |movie|
+        (movie.genres.map { |genre| genre['name'] } & genres).empty?
+      end
+    end
+
     def self.filter_by_title(movies, title)
       return movies unless title
       movies.select { |movie| movie.title.downcase.include?(title) }
@@ -43,6 +50,7 @@ module Librarix
       @movies ||= begin
         movies = Librarix::Redis::Movie.all
 
+        movies = self.class.filter_by_genre(movies, genres)
         movies = self.class.filter_by_title(movies, params['title'])
         movies = self.class.filter_by_view_state(movies, params['view_state'])
 
@@ -53,6 +61,10 @@ module Librarix
 
     def group
       @group ||= params.key?('group') && params['group']
+    end
+
+    def genres
+      @genres ||= params.key?('genres') ? params['genres'].keys : []
     end
 
     def view_state
