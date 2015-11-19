@@ -2,14 +2,16 @@
   = movie.title
 
 .movie data-id="#{movie.id}"
+  h1 = movie.original_title
   .poster
     - if movie.poster_path
       img src="#{poster_url(movie.poster_path, 'w154')}"
   .informations
-    h2
-      a href="#{url("/movie/#{movie.id}")}" #{movie.original_title}
     p = movie.release_date
     p = movie.overview
+    p
+      a> href="https://www.themoviedb.org/movie/#{movie.id}" The Movie DB
+      | (#{movie.vote_average}/10, #{movie.vote_count} votes)
   .actions
     - if movie.added?
       - unless movie.viewed?
