@@ -3,7 +3,7 @@
     img src="#{poster_url(movie.poster_path, 'w154')}"
 .informations
   h2
-    a href="#{url("/movie/#{movie.id}")}" #{movie.original_title}
+    a href="#{url("/movie/#{movie.id}")}" #{movie.title}
   p = movie.release_date
   p = movie.overview
   ul.genres
